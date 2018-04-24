@@ -7,7 +7,7 @@ start: build
 	aws-sam-local local start-api 
 
 package: build
-	aws cloudformation package --template-file ./sam.yaml --s3-bucket keymesh-tgbot --output-template-file ./packaged.yaml
+	aws cloudformation package --template-file ./template.yml --s3-bucket keymesh-tgbot --output-template-file ./packaged.yaml
 
 deploy: package
 	aws cloudformation deploy --template-file ./packaged.yaml --stack-name keymesh-tgbot --capabilities CAPABILITY_NAMED_IAM

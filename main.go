@@ -53,7 +53,7 @@ func init() {
 	}
 }
 
-var ErrMessageIsEmpty= errors.New("message could not be empty")
+var errMessageIsEmpty= errors.New("message could not be empty")
 
 func errResponse(err error) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
@@ -69,18 +69,18 @@ func parseBody(body []byte, update *tgbotapi.Update) error {
 	}
 
 	if update.Message == nil {
-		return ErrMessageIsEmpty
+		return errMessageIsEmpty
 	}
 
 	return nil
 }
 
 
-func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var update tgbotapi.Update
 	err := parseBody([]byte(request.Body), &update)
 	if err != nil {
-		return errResponse(ErrMessageIsEmpty)
+		return errResponse(err)
 	}
 
 	rawText := update.Message.Text
@@ -102,5 +102,5 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 }
 
 func main() {
-	lambda.Start(Handler)
+	lambda.Start(handler)
 }
