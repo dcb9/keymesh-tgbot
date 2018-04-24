@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: TG bot Go Lambda function
+
+Resources:
+
+  TGBot:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      CodeUri: s3://keymesh-tgbot/main.zip
+      Runtime: go1.x
+      Timeout: 15
+      Role: arn:aws:iam::917001910072:role/keymesh-tgbot
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /tgbot
+            Method: post
