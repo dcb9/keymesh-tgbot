@@ -89,7 +89,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	if strings.HasPrefix(rawText, "/start") && len(rawText) >= 8 {
 		text := update.Message.Text[7:]
 		username := userMap[text]
-		message := fmt.Sprintf("Hello %s.\nOne more step. 😍😍😍Join group to get 1000 KeyMesh Tokens for free.👇👇👇\n还差一步，进群即可领 1000 KeyMeshToken，更有百万 token 空投活动在 telegram 群不定时赠送：🎁🎁🎁https://t.me/keymesh.", username)
+		message := fmt.Sprintf("Hello %s.\nOne more step. 😍😍😍Join group to get 1000 KeyMesh Tokens for free.👇👇👇\n还差一步，进群即可领 1000 KeyMeshToken，更有百万 KeyMeshToken 空投活动在 telegram 群不定时赠送：🎁🎁🎁https://t.me/keymesh.", username)
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
 
 		bot.Send(msg)
